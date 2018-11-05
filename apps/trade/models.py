@@ -12,8 +12,8 @@ class ShoppingCart(models.Model):
     """
     购物车
     """
-    user = models.ForeignKey(User, verbose_name=u"用户")
-    goods = models.ForeignKey(Goods, verbose_name=u"商品")
+    user = models.ForeignKey(User, verbose_name=u"用户", on_delete=models.CASCADE)
+    goods = models.ForeignKey(Goods, verbose_name=u"商品", on_delete=models.CASCADE)
     goods_num = models.IntegerField(default=0, verbose_name="购买数量")
     add_time =  models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
@@ -35,7 +35,7 @@ class OrderInfo(models.Model):
         ("cancel",  "待支付"),
     )
 
-    user = models.ForeignKey(User, verbose_name=u"用户")
+    user = models.ForeignKey(User, verbose_name=u"用户", on_delete=models.CASCADE)
     order_sn = models.CharField(max_length=30, unique=True, verbose_name="订单号")
     trade_no = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="")
     pay_status = models.CharField(choices=ORDER_STATUS, max_length=10, verbose_name="订单状态")
@@ -62,8 +62,8 @@ class OrderGoods(models.Model):
     """
     订单的商品详情
     """
-    order = models.ForeignKey(OrderInfo, verbose_name=u"订单信息")
-    goods = models.ForeignKey(Goods, verbose_name="商品")
+    order = models.ForeignKey(OrderInfo, verbose_name=u"订单信息", on_delete=models.CASCADE)
+    goods = models.ForeignKey(Goods, verbose_name="商品", on_delete=models.CASCADE)
     goods_num = models.IntegerField(default=0, verbose_name="商品数量")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
