@@ -19,17 +19,23 @@ from django.views.static import serve
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-from rest_framework.documentation import include_docs_urls
 
-from goods.views import GoodsListView
+from rest_framework.documentation import include_docs_urls
+from rest_framework import renderers
+from rest_framework.routers import DefaultRouter
+
+from goods.views import GoodsListViewset
 # import xadmin
 
+router = DefaultRouter()
+
+# 配置goods的url
+router.register(r'goods', GoodsListViewset)
+
 urlpatterns = [
-    # path('media/<path>',serve, {"document_root": MEDIA_ROOT}),
     # path('xadmin/', xadmin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 
-    # 商品列表页
-    path('goods/', GoodsListView.as_view(), name="goods-list"),
+    path('', include(router.urls)),
     path('docs/', include_docs_urls(title='dudu'))
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
