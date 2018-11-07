@@ -30,11 +30,11 @@ from goods.views import GoodsListViewset
 router = DefaultRouter()
 
 # 配置goods的url
-router.register(r'goods', GoodsListViewset)
+router.register(r'goods', GoodsListViewset, base_name="goods")
 
 urlpatterns = [
     # path('xadmin/', xadmin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('', include(router.urls)),
     path('docs/', include_docs_urls(title='dudu'))
