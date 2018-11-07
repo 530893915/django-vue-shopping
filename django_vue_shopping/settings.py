@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig',
+    'crispy_forms',
+    'rest_framework',
+    'django_filters',
+    'guardian',
+    # 'xadmin'
 ]
 
 MIDDLEWARE = [
