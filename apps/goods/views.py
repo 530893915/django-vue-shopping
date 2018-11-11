@@ -7,8 +7,8 @@ from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
-from .models import Goods
-from .serializers import GoodsSerializer
+from .models import Goods, GoodsCategory
+from .serializers import GoodsSerializer, CategorySerializer
 from .filters import GoodsFilter
 
 
@@ -21,7 +21,7 @@ class GoodsPagination(PageNumberPagination):
     max_page_size = 100
 
 
-class GoodsListViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     商品列表页(分页、搜索、过滤、排序)
     """
@@ -32,3 +32,13 @@ class GoodsListViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
     filter_class = GoodsFilter
     search_fields = ('name', 'goods_brief', 'goods_desc')
     ordering_fields = ('sold_num', 'add_time')
+
+
+class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    list:
+        商品分类列表数据
+    """
+    queryset = GoodsCategory.objects.filter(category_type=1)
+    serializer_class = CategorySerializer
+    pagination_class = None
