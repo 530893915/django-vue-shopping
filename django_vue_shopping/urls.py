@@ -25,7 +25,7 @@ from rest_framework import renderers
 from rest_framework.routers import DefaultRouter
 
 from goods.views import GoodsListViewSet, CategoryViewSet
-# import xadmin
+import xadmin
 
 router = DefaultRouter()
 
@@ -40,7 +40,7 @@ goods_list = GoodsListViewSet.as_view({
 })
 
 urlpatterns = [
-    # path('xadmin/', xadmin.site.urls),
+    path('xadmin/', xadmin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('', include(router.urls)),
