@@ -2,4 +2,7 @@ from django.apps import AppConfig
 
 
 class UserConfig(AppConfig):
-    name = 'apps.users'
+    name = 'users'
+
+    def ready(self):
+        import users.signals
