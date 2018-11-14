@@ -24,6 +24,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework import renderers
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 from goods.views import GoodsListViewSet, CategoryViewSet
 import xadmin
@@ -43,8 +44,12 @@ goods_list = GoodsListViewSet.as_view({
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     #drf自带的token认证模式
     path('api-token-auth/', views.obtain_auth_token),
+
+    # jwt的认证接口
+    path('login/', obtain_jwt_token),
 
     path('', include(router.urls)),
     path('docs/', include_docs_urls(title='dudu'))
